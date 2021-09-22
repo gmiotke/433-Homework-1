@@ -7,6 +7,11 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(readr)
 ```
 
 Hello There!!
+
+```{r}
+read_csv("MI16.TXT")
+```
