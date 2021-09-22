@@ -7,7 +7,7 @@ Hello
     There\!\!
 
 ``` r
-read_csv("MI16.TXT")
+bridges = read_csv("MI16.TXT")
 ```
 
     ## Rows: 11156 Columns: 135
@@ -23,20 +23,20 @@ read_csv("MI16.TXT")
     ## i Use `spec()` to retrieve the full column specification for this data.
     ## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
-    ## # A tibble: 11,156 x 135
-    ##    STATE_CODE_001 STRUCTURE_NUMBE~ RECORD_TYPE_005A ROUTE_PREFIX_00~
-    ##             <dbl> <chr>                       <dbl>            <dbl>
-    ##  1             26 000000000000007                 1                2
-    ##  2             26 000000000000009                 1                4
-    ##  3             26 000000000000010                 1                4
-    ##  4             26 000000000000011                 1                4
-    ##  5             26 000000000000012                 1                4
-    ##  6             26 000000000000013                 1                4
-    ##  7             26 000000000000014                 1                4
-    ##  8             26 000000000000015                 1                4
-    ##  9             26 000000000000016                 1                4
-    ## 10             26 000000000000017                 1                4
-    ## # ... with 11,146 more rows, and 131 more variables: SERVICE_LEVEL_005C <dbl>,
+``` r
+head(bridges)
+```
+
+    ## # A tibble: 6 x 135
+    ##   STATE_CODE_001 STRUCTURE_NUMBE~ RECORD_TYPE_005A ROUTE_PREFIX_00~
+    ##            <dbl> <chr>                       <dbl>            <dbl>
+    ## 1             26 000000000000007                 1                2
+    ## 2             26 000000000000009                 1                4
+    ## 3             26 000000000000010                 1                4
+    ## 4             26 000000000000011                 1                4
+    ## 5             26 000000000000012                 1                4
+    ## 6             26 000000000000013                 1                4
+    ## # ... with 131 more variables: SERVICE_LEVEL_005C <dbl>,
     ## #   ROUTE_NUMBER_005D <chr>, DIRECTION_005E <dbl>, HIGHWAY_DISTRICT_002 <chr>,
     ## #   COUNTY_CODE_003 <chr>, PLACE_CODE_004 <dbl>, FEATURES_DESC_006A <chr>,
     ## #   CRITICAL_FACILITY_006B <lgl>, FACILITY_CARRIED_007 <chr>,
@@ -78,3 +78,19 @@ read_csv("MI16.TXT")
     ## #   STRAHNET_HIGHWAY_100 <dbl>, PARALLEL_STRUCTURE_101 <chr>,
     ## #   TRAFFIC_DIRECTION_102 <dbl>, TEMP_STRUCTURE_103 <lgl>,
     ## #   HIGHWAY_SYSTEM_104 <dbl>, ...
+
+``` r
+#See when bridges in Michigan were first built
+ggplot(bridges) + 
+  geom_bar(aes(YEAR_BUILT_027))
+```
+
+![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+
+``` r
+#See if the year the bridge was built is related to the length of the bridge
+ggplot(bridges) + 
+  geom_point(aes(YEAR_BUILT_027, STRUCTURE_LEN_MT_049))
+```
+
+![](README_files/figure-gfm/unnamed-chunk-1-2.png)<!-- -->
